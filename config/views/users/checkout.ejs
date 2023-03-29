@@ -409,16 +409,24 @@ Follow me on Codepen
                     </div> -->
                     <!-- End .collapse -->
                   </div><!-- End .card -->
-
+                  <div class="card">
+                    <div class="card-header" id="heading-3">
+                      <h2 class="card-title">
+                        <input name="payment" id="upi" type="radio" value="wallet" class="collapsed" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-3">
+                        Wallet
+                      </h2>
+                    </div>
+                  </div>
+                  <!-- <div class="card"> -->
                   <div class="card">
                     <div class="card-header" id="heading-4">
-                      <h2 class="card-title">
+                      <!-- <h2 class="card-title">
 
                         <input type="radio" name="payment" value="paypal">
                         paypal
-                      </h2>
-                      <div id="paypal"></div>
-                    </div><!-- End .card-header -->
+                      </h2> -->
+                      <!-- <div id="paypal"></div>
+                    </div>End .card-header -->
                     <div id="collapse-4" class="collapse" aria-labelledby="heading-4" data-parent="#accordion-payment">
                       <div class="card-body">
                         Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non,
@@ -427,8 +435,7 @@ Follow me on Codepen
                       </div><!-- End .card-body -->
                     </div><!-- End .collapse -->
                   </div><!-- End .card -->
-
-                  <div class="card">
+                  
                     <!-- <div class="card-header" id="heading-5">
                       <h2 class="card-title">
                         <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-5" aria-expanded="false" aria-controls="collapse-5">
@@ -446,7 +453,7 @@ Follow me on Codepen
                     </div><!-- End .collapse -->
                   </div><!-- End .card -->
                 </div><!-- End .accordion -->
-
+              
 
 
 
@@ -693,7 +700,13 @@ Follow me on Codepen
           
 
             paypalPayment(response.totalPrice)
-          } else {
+          } 
+          else if (response.wallet == true) {
+          
+
+          walletPayment(response.totalPrice)
+        }
+        else {
             
 
             console.log("comes here razor");
@@ -781,54 +794,58 @@ Follow me on Codepen
 
   }
 
-  function paypalPayment(total) {
-    console.log("heyyy/API");
-    paypal
-      .Buttons({
-        createOrder: function() {
-          return fetch("/create-order", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                  total:total,
-              }),
-            })
-            .then(res => {
-              if (res.ok) return res.json()
-              return res.json().then(json => Promise.reject(json))
-            })
-            .then(({
-              id
-            }) => {
-              return id
-            })
-            .catch(e => {
-              console.error(e.error)
-            })
-        },
-        onApprove: function(data, actions) {
-          return actions.order.capture()
-            .then(() => {
-              $.ajax({
-                url: '/paypal-success',
-                method: 'get',
-                success: (response) => {
-                  if (response.status) {
-                    location.replace('/success')
-                  } else {
+  // function paypalPayment(total) {
+  //   console.log("heyyy/API");
+  //   paypal
+  //     .Buttons({
+  //       createOrder: function() {
+  //         return fetch("/create-order", {
+  //             method: "POST",
+  //             headers: {
+  //               "Content-Type": "application/json",
+  //             },
+  //             body: JSON.stringify({
+  //                 total:total,
+  //             }),
+  //           })
+  //           .then(res => {
+  //             if (res.ok) return res.json()
+  //             return res.json().then(json => Promise.reject(json))
+  //           })
+  //           .then(({
+  //             id
+  //           }) => {
+  //             return id
+  //           })
+  //           .catch(e => {
+  //             console.error(e.error)
+  //           })
+  //       },
+  //       onApprove: function(data, actions) {
+  //         return actions.order.capture()
+  //           .then(() => {
+  //             $.ajax({
+  //               url: '/paypal-success',
+  //               method: 'get',
+  //               success: (response) => {
+  //                 if (response.status) {
+  //                   location.replace('/success')
+  //                 } else {
 
-                  }
-                }
-              })
+  //                 }
+  //               }
+  //             })
 
-            })
-        },
-      })
-      .render("#paypal")
-  }
-
+  //           })
+  //       },
+  //     })
+  //     .render("#paypal")
+  // }
+ 
+ function walletPayment(response)
+ {
+  console.log('k');
+ } 
 
 // FILL ADDRESSS
 

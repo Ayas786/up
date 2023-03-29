@@ -58,8 +58,9 @@
   </td>
   <td>
  <a href="/admin/edit-product/<%=products._id%>"> <button class="btn-primary">edit</button></a> 
- <a href="/admin/delete-product/<%=products._id%>" onclick="return confirm('are you sure want to delete the product <%= products.name %>')"><button class="btn-danger">delete</button></a>
-  </td>
+ <button onclick="deleteBanner('<%=products._id%>' )" class="btn-danger">delete</button>
+
+</td>
 </tr>
 <% })%>
     </tbody>
@@ -82,3 +83,18 @@
     </ul>
   </nav>
 </div>
+<script>
+  const deleteBanner = (id) => {
+    if (prompt('Delete Category ? Type yes to confirm', 'yes')?.trim() == 'yes') {
+
+      fetch(`/admin/delete-product/${id}`, {
+        method: "delete",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      }).then((res)=>{
+        window.location.reload()
+      })
+    };
+  }
+</script>

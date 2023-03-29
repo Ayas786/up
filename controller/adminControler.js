@@ -107,7 +107,8 @@ index=index.filter((item,i)=>index.indexOf(item)==i)
   },
   deleteProduct: (req, res) => {
     productHelpers.deleteProduct(req.params.id).then(() => {
-      res.redirect("/admin/products");
+      // res.redirect("/admin/products");
+      res.send(response)
       console.log("yes");
     });
   },
@@ -167,7 +168,8 @@ index=index.filter((item,i)=>index.indexOf(item)==i)
   deleteCategory: (req, res) => {
     let category = req.params.id;
     productHelpers.deleteCategory(category).then((response) => {
-      res.redirect("/admin/category");
+      // res.redirect("/admin/category");
+      res.send(response)
     });
   },
   getOrderDetails: async (req, res) => {
@@ -283,9 +285,9 @@ console.log(yearly,"yearly data");
   },
   deleteMainBanner: (req, res) => {
     let bannerId = req.params.id;
-
+    console.log('requset',bannerId);
     productHelpers.deleteMainBanner(bannerId).then((response) => {
-      res.redirect("/admin/mainBanner");
+      res.send(response)
     });
   },
 
@@ -314,7 +316,7 @@ console.log(yearly,"yearly data");
   deleteCoupon: (req, res) => {
     let couponId = req.params.id;
     couponHelpers.removecoupon(couponId).then((response) => {
-      res.redirect("/admin/coupon");
+      res.send(response)
     });
   },
   getExceldata: (req, res) => {

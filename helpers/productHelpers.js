@@ -219,7 +219,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       try {
         db.banner.deleteOne({ _id: dataId }).then((res) => {
-          resolve();
+          resolve({success:true});
         });
       } catch (error) {
         console.log(error);

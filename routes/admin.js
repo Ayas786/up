@@ -76,7 +76,7 @@ router.get("/edit-product/:id", verifyAdmin, adminController.editProductGet);
 router.post("/edit-product/:id",upload.array('image') ,adminController.editProductPost);
 
 // Delete products
-router.get("/delete-product/:id", verifyAdmin, adminController.deleteProduct);
+router.delete("/delete-product/:id", verifyAdmin, adminController.deleteProduct);
 
 // USER Management
 // user view
@@ -101,7 +101,7 @@ router.get("/edit-category/:id", verifyAdmin, adminController.editCategoryGet);
 router.post("/edit-category/:id",verifyAdmin,adminController.editCategoryPost);
 
 // delete catogory
-router.get("/delete-category/:id", verifyAdmin, adminController.deleteCategory);
+router.delete("/delete-category/:id", verifyAdmin, adminController.deleteCategory);
 
 router.get("/orders", verifyAdmin, adminController.getOrderDetails);
 
@@ -121,13 +121,13 @@ router.get('/mainBanner',verifyAdmin,adminController.mainBanner)
 router.get('/add-bannerMain',verifyAdmin,adminController.mainBannerget)
 router.post('/add-bannerMain',verifyAdmin,upload2.array('image') ,adminController.mainBannerpost)
 
-router.get('/delete-mainBanner/:id',verifyAdmin,adminController.deleteMainBanner)
+router.delete('/delete-mainBanner/:id',verifyAdmin,adminController.deleteMainBanner)
 
 router.get('/catabanner',verifyAdmin,adminController.cataBannerget)
 router.get('/addCataBanner',verifyAdmin,adminController.addCataBanner)
 router.post('/add-cataBanner',verifyAdmin,upload2.array('image'),adminController.addCataBannerPost)
 
-router.get('/delete-cataBanner/:id',verifyAdmin,adminController.deleteCataBanner)
+router.delete('/delete-cataBanner/:id',verifyAdmin,adminController.deleteCataBanner)
 
 
 

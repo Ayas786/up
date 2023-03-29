@@ -28,11 +28,28 @@
     </td>
     <td>
  <a href="/admin/edit-category/<%- category._id%>" class="btn btn-success">edit</a>
- <a href="/admin/delete-category/<%- category._id%>" class="btn btn-danger" onclick="return confirm('are you sure')" >delete</a>
-    </td>
+ <!-- <a href="/admin/delete-category/<%- category._id%>" class="btn btn-danger" onclick="return confirm('are you sure')" >delete</a> -->
+ <button onclick="deleteC('<%=category._id%>' )" class="btn-danger">delete</button>  
+</td>
    
   </tr>
 <% }) %> 
       </tbody>
     </table>
   </div>
+
+  <script>
+    const deleteC = (id) => {
+      if (prompt('Delete Category ? Type yes to confirm', 'yes')?.trim() == 'yes') {
+  
+        fetch(`/admin/delete-category/${id}`, {
+          method: "delete",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        }).then((res)=>{
+          window.location.reload()
+        })
+      };
+    }
+  </script>

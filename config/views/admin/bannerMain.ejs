@@ -8,21 +8,21 @@
           #
         </th>
         <th>
-            name
-         
+          name
+
         </th>
         <th>
-            image
+          image
         </th>
         <th>
           Description
         </th>
         <th>
-            market price
+          market price
         </th>
         <th>
-            offer price
-          
+          offer price
+
         </th>
         <th>
           <!-- <button>btn</button> -->
@@ -32,34 +32,51 @@
       </tr>
     </thead>
     <tbody>
-        <% bannerData.forEach((element,index)=>{ %>
+      <% bannerData.forEach((element,index)=>{ %>
 
-      <tr>
-        <td>
-          <%= index+1  %> 
-        </td>
-        <td>
-            <%=element.name %> 
+        <tr>
+          <td>
+            <%= index+1 %>
           </td>
-        <td>
-          <img style="border-radius:0;" src="/assets/banner-images/<%=element.img[0]%> " alt="img">
-        </td>
-    
-        <td>
-          <%=element.description %> 
-        </td>
-        <td>
-        <%= element.marketprice  %> 
-        </td>
+          <td>
+            <%=element.name %>
+          </td>
+          <td>
+            <img style="border-radius:0;" src="/assets/banner-images/<%=element.img[0]%> " alt="img">
+          </td>
 
-        <td>
-            <%= element.offerprice  %> 
-        </td>
-        <td>
-          <a href="/admin/delete-mainBanner/<%=element._id  %> " onclick="return confirm('are you sure want to delete the product ')"><button class="btn-danger">delete</button></a>
-        </td>
-      </tr>
-    <% }) %> 
+          <td>
+            <%=element.description %>
+          </td>
+          <td>
+            <%= element.marketprice %>
+          </td>
+
+          <td>
+            <%= element.offerprice %>
+          </td>
+          <td>
+            <button onclick="deleteBanner('<%=element._id%>' )" class="btn-danger">delete</button>
+          </td>
+        </tr>
+        <% }) %>
     </tbody>
   </table>
 </div>
+
+
+<script>
+  const deleteBanner = (id) => {
+    if (prompt('Delete Category ? Type yes to confirm', 'yes')?.trim() == 'yes') {
+
+      fetch(`/admin/delete-mainBanner/${id}`, {
+        method: "delete",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      }).then((res)=>{
+        window.location.reload()
+      })
+    };
+  }
+</script>
