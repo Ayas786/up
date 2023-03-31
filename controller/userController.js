@@ -236,6 +236,8 @@ module.exports = {
       user: true,
       address,
       cartCount,
+     userHelpers 
+
     });
   },
   checkoutPost: async (req, res) => {
@@ -245,6 +247,9 @@ module.exports = {
     // console.log(req.body, "raor body");
     // console.log(total, "raor total");
     req.body.userId = req.session.user._id;
+    console.log("-----------------------------");
+    console.log(req.body);
+    console.log("---------------------------------");
     userHelpers.placeOrder(req.body, total, req.session.coupon,couponAmount)
       .then((response) => {
         if (req.body.payment == "COD") {

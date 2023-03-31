@@ -161,8 +161,11 @@ module.exports = {
     
       try {
         let date = new Date();
+        console.log(date,'676');
         let thismonth = date.getMonth();
-        let month = thismonth + 1;
+        console.log(thismonth,'679');
+
+        let month = thismonth +1;
         let year = date.getFullYear();
         return new Promise(async(resolve, reject) => {
             
@@ -175,9 +178,10 @@ module.exports = {
                 },
                 {
                     $match:{'orders.createdAt':{
-                        $gt:new Date(`${year}-${month}-01`),
-                        $lt:new Date(`${year}-${month}-31`),
-
+                        // $gt:new Date(`${year}-${month}-00`),
+                        // $lt:new Date(`${year}-${month}-31`),
+                        $gt:new Date(`${year}-${month}-${ Date.getDate}`),
+                        // $lt:new Date(`${year}-${month}-${ Date.getDate}`),
 
                     }}
                 },
@@ -223,7 +227,9 @@ module.exports = {
                 $unwind:'$orders.productDetails'
             },
             {
-                 $match:{'orders.createdAt':{$gt:new Date(`${year-5}-${month}-01`),$lt:new Date(`${year}-${month}-31`)}}
+                  // $match:{'orders.createdAt':{$gt:new Date(`${year-5}-${month}-01`),$lt:new Date(`${year}-${month}-31`)}}
+                $match:{'orders.createdAt':{$gt:new Date(`${year-5}-${month}-${ Date.getDate}`),$lte:new Date(`${year}-${month}-${ Date.getDate}`)}}
+
             },
             {
                 $match:{'orders.productDetails.shippingStatus':4}

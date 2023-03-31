@@ -409,14 +409,14 @@ Follow me on Codepen
                     </div> -->
                     <!-- End .collapse -->
                   </div><!-- End .card -->
-                  <div class="card">
+                  <!-- <div class="card">
                     <div class="card-header" id="heading-3">
                       <h2 class="card-title">
                         <input name="payment" id="upi" type="radio" value="wallet" class="collapsed" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-3">
                         Wallet
                       </h2>
                     </div>
-                  </div>
+                  </div> -->
                   <!-- <div class="card"> -->
                   <div class="card">
                     <div class="card-header" id="heading-4">
@@ -703,8 +703,8 @@ Follow me on Codepen
           } 
           else if (response.wallet == true) {
           
-
-          walletPayment(response.totalPrice)
+            console.log('wallet');
+          walletPayment(res)
         }
         else {
             
@@ -844,7 +844,7 @@ Follow me on Codepen
  
  function walletPayment(response)
  {
-  console.log('k');
+  console.log(userdetails.wallet);
  } 
 
 // FILL ADDRESSS
