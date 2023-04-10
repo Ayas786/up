@@ -66,8 +66,16 @@ module.exports = {
       });
     });
   },
-  editProductPost:async (req, res) => {
 
+  editCouponGet: async (req, res) => {
+    console.log(req.params.id,'getc');
+    let coupon = await productHelpers.getCouponDetails(req.params.id);
+    console.log('getc',coupon);
+    res.render("admin/edit-coupon", { layout, coupon, nav: true });
+  },
+
+  editProductPost:async (req, res) => {
+log
  //converts string to array 
  let index = req.body.indexOfImage.split(',').map(function(item) {
   return parseInt(item, 10);
@@ -155,9 +163,9 @@ index=index.filter((item,i)=>index.indexOf(item)==i)
     let category = await productHelpers.getCategoryDetails(req.params.id);
     res.render("admin/edit-category", { layout, category, nav: true });
   },
-  editCategoryPost: (req, res) => {
-    console.log(req.body, "body");
-    productHelpers.updateCategory(req.params.id, req.body).then((data) => {
+  editCategoryPost:async (req, res) => {
+    console.log(data, "body");
+   await productHelpers.updateCategory(req.params.id, req.body).then((data) => {
       if (data.status) {
         res.send({ value: "success" });
       } else {
@@ -165,6 +173,18 @@ index=index.filter((item,i)=>index.indexOf(item)==i)
       }
     });
   },
+
+  editCouponPost: async(req, res) => {
+    console.log(req.body,req.params.id, "body");
+   await productHelpers.updateCoupon(req.body,req.params.id).then((data) => {
+      if (data.status) {
+        res.send({ value: "success" });
+      } else {
+        res.send({ value: "failed" });
+      }
+    });
+  },
+
   deleteCategory: (req, res) => {
     let category = req.params.id;
     productHelpers.deleteCategory(category).then((response) => {
@@ -312,6 +332,23 @@ console.log(yearly,"yearly data");
       res.json({ status: true });
     });
   },
+
+  // editCouponGet: async (req, res) => {
+  //   console.log(req.params.id,'getc');
+  //   let coupon = await productHelpers.getCouponDetails(req.params.id);
+  //   res.render("admin/edit-coupon", { layout, coupon, nav: true });
+  // },
+ 
+  // editCouponPost: (req, res) => {
+  //   console.log(req.body, "body");
+  //   productHelpers.updateCategory(req.params.id, req.body).then((data) => {
+  //     if (data.status) {
+  //       res.send({ value: "success" });
+  //     } else {
+  //       res.send({ value: "failed" });
+  //     }
+  //   });
+  // },
 
   deleteCoupon: (req, res) => {
     let couponId = req.params.id;

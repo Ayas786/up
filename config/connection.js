@@ -1,6 +1,9 @@
 const { ObjectID } = require('bson');
 const mongoose = require('mongoose')
 const { ObjectId } = require('mongoose')
+var express = require('express');
+var app = express();
+app.use(express.json());
 
 // db connection
 const db = mongoose.createConnection("mongodb://127.0.0.1:27017/cycle")

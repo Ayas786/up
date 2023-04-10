@@ -46,8 +46,10 @@
     </td>
 
     <td>
- <!-- <a href="/admin/edit-catego" class="btn btn-success">edit</a> -->
- <a href="/admin/delete-coupon/<%=element._id %> " class="btn btn-danger" onclick="return confirm('are you sure')" >delete</a>
+ <a href="/admin/edit-coupon/<%=element._id %>" class="btn btn-success">edit</a>
+ <!-- <a href="/admin/delete-coupon/<%=element._id %> " class="btn btn-danger" onclick="return confirm('are you sure')" >delete</a> -->
+ <button onclick="deleteBanner('<%=element._id%>' )" class="btn-danger">delete</button>
+
     </td>
    
   </tr>
@@ -55,3 +57,18 @@
       </tbody>
     </table>
   </div>
+  <script>
+      const deleteBanner = (id) => {
+    if (prompt('Delete Category ? Type yes to confirm', 'yes')?.trim() == 'yes') {
+
+      fetch(`/admin/delete-coupon/${id}`, {
+        method: "delete",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      }).then((res)=>{
+        window.location.reload()
+      })
+    };
+  }
+  </script>

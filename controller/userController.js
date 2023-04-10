@@ -50,6 +50,7 @@ module.exports = {
     let product = await productHelpers.getAllproducts();
     let mainBanner = await productHelpers.getBanner();
     let cataBanner= await productHelpers.getCataBanner()
+    console.log(cataBanner);
     console.log(req?.session?.user?._id,"logdincase");
     if (user) {
       let cartCount = await userHelpers.getCartCount(req?.session?.user?._id);
@@ -153,16 +154,24 @@ module.exports = {
       });
   },
 
-  shopPage: (req, res, next) => {
+  shopPage:async (req, res, next) => {
     console.log(req.query,"query");
     let user=req.session.loggedIn
+    // let category=productHelpers.getCategory()
+    
+    // console.log(category);
+    let cataBanner= await productHelpers.getCataBanner()
+
     productHelpers.getAllproducts(req.query).then(async (products) => {
       let cartCount = await userHelpers.getCartCount(req?.session?.user?._id);
+      console.log(cartCount,'d');
       res.render("users/user-shop", {
         products,
         nav: true,
         user,
         cartCount,
+        cataBanner
+        // category
       });
     });
 

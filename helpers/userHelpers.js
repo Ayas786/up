@@ -8,6 +8,7 @@ var instance = new Razorpay({
   key_secret: "Y8ZLXIMBUbuT28CeqB6FWu1L",
 });
 
+
 module.exports = {
   doLogin: (userData) => {
     return new Promise(async (resolve, reject) => {

@@ -136,8 +136,13 @@ router.get('/coupon',verifyAdmin,adminController.getallcoupon)
 router.get('/add-coupon',verifyAdmin,adminController.addCoupon)
 
 router.post('/add-coupon',verifyAdmin,adminController.addcoupon)
+
+router.get("/edit-coupon/:id", verifyAdmin, adminController.editCouponGet);
+
+router.post("/edit-coupon/:id",verifyAdmin, adminController.editCouponPost);
+
 router.get('/generate-coupon-code',verifyAdmin,adminController.generateCoupon)
 
-router.get('/delete-coupon/:id',verifyAdmin,adminController.deleteCoupon)
+router.delete('/delete-coupon/:id',verifyAdmin,adminController.deleteCoupon)
 
 module.exports = router;

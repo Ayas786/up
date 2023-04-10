@@ -14,6 +14,7 @@ module.exports = {
       }
     });
   },
+  
   getAllproducts: (query) => {
     return new Promise( (resolve, reject) => {
       try {
@@ -156,11 +157,100 @@ module.exports = {
       }
     });
   },
+
+  // updateCoupon: (cateId, cateDetails) => {
+  //   // console.log(cateId,"/////,cateDetails,"...");
+  //   return new Promise(async (resolve, reject) => {
+  //     try {
+  //       cateDetails.name = await cateDetails.name.toUpperCase();
+
+  //       let data = await db.categories.find({
+  //         _id: cateId,
+  //         name: cateDetails.name,
+  //       });
+
+  //       if (data.length != 0) {
+  //         await db.categories
+  //           .updateOne(
+  //             { _id: cateId },
+  //             {
+  //               $set: {
+  //                 name: cateDetails.name,
+  //               },
+  //             }
+  //           )
+  //           .then((data) => {
+  //             data.status = true;
+  //             resolve(data);
+  //           });
+  //       } else {
+  //         resolve({ status: false });
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   });
+  // },
+
+  updateCoupon: (data, prodId) => {
+    console.log('sy');
+    console.log(data,prodId,'ad');
+    return new Promise(async (resolve, reject) => {
+      try {
+        // let dbProData= await db.coupons.findOne({_id:prodId})
+        console.log('update'),
+
+          await db.coupon.updateOne(
+            { _id: prodId },
+
+                          {
+                $set: {
+                  // name: data.couponName,
+                  couponName: data.couponName,
+                  expiry: data.expiry,
+                  minPurchase: data.minPurchase,
+                  description: data.description,
+                  discountPercentage: data.discountPercentage,
+                  maxDiscountValue: data.maxDiscountValue
+                },
+              }
+            // {
+            //   name: data.name,
+              // catogory: data.catogory,
+              // price: data.price,
+              // description: data.description,
+              // stock: data.stock,
+              // img: data.img,
+              // offerpercentage: data.offerpercentage,
+              // offerprice: data.offerprice,
+            // }
+          )
+
+        
+      resolve()
+         
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  },
+
   getCategoryDetails: (cateId) => {
     return new Promise(async (resolve, reject) => {
       try {
         await db.categories.findOne({ _id: cateId }).then((categories) => {
           resolve(categories);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  },
+  getCouponDetails: (id) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        db.coupon.findOne({ _id: id }).then((coupon) => {
+          resolve(coupon);
         });
       } catch (error) {
         console.log(error);
